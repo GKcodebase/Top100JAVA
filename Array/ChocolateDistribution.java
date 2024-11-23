@@ -22,9 +22,11 @@ public class ChocolateDistribution {
 
     }
     public static void main(String args[]){
-        int arr[] = {12, 4, 7, 9, 2, 23, 25, 41, 30, 40, 28, 42, 30, 44, 48, 43, 50};
-        int m = 7;
- 
+        int arr[] = {7, 3, 2, 4, 9, 12, 56};
+        int m = 3;
+        // 2,3,4,7,9,12,56
+        // 4-2 =2, 7-3=4, 9-4=5, 12-7=5, 56-9=47
+        
         // Calculate the result using the chocolateDistribution method
         int result = chocolateDistribution(arr, m);
  
