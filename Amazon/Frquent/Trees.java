@@ -168,6 +168,62 @@ public class Trees {
     }
 
     /**
+     * Delete node node.
+     *
+     * @param root the root
+     * @param key  the key
+     * @return the node
+     */
+    public static Node deleteNode(Node root, int key) {
+        if (root == null)
+            return root;
+        if (root.val > key)
+            root.left = deleteNode(root.left, key);
+        else if (root.val < key)
+            root.right = deleteNode(root.right, key);
+        else {
+            if (root.left == null)
+                return root.right;
+            if (root.right == null)
+                return root.left;
+
+            Node inOrderNode = getSuccessor(root);
+            root.val = inOrderNode.val;
+            root.right = deleteNode(root.right, inOrderNode.val);
+
+        }
+        return root;
+    }
+
+    /**
+     * Gets successor.
+     *
+     * @param root the root
+     * @return the successor
+     */
+    static Node getSuccessor(Node root) {
+        root = root.right;
+        while (null != root && root.left != null)
+            root = root.left;
+        return root;
+    }
+
+    /**
+     * In order traversal.
+     *
+     * @param root the root
+     */
+    public static void inOrderTraversal(Node root){
+        if(root == null)
+            return ;
+
+        inOrderTraversal(root.left);
+        System.out.print(root.val + " ");
+        inOrderTraversal(root.right);
+
+    }
+
+    /**
      * The entry point of application.
      *
      * @param args the input arguments
@@ -227,6 +283,22 @@ public class Trees {
         System.out.println("Does it follow child sum property : " + doesFollowChildrenSumProperty(root2));
 
         System.out.println("LCA of Binary Tree :" + getLeastCommonAncestor(root2, 20, 5).val);
+
+
+        // BST
+        Node root3 = new Node(10);
+        root3.left = new Node(5);
+        root3.right = new Node(15);
+        root3.right.left = new Node(12);
+        root3.right.right = new Node(18);
+        inOrderTraversal(root3);
+        System.out.println();
+
+        int x = 10;
+        root = deleteNode(root3, x);
+        inOrderTraversal(root3);
+        System.out.println();
+
 
     }
 
